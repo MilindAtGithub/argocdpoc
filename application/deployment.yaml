@@ -21,16 +21,15 @@ spec:
 apiVersion: apps/v1
 kind: Service
 metadata:
+  name: nginx-service
   labels:
-    app.kubernetes.io/instance: nginx-app
-    name: nginx
-  name: nginx
-  namespace: default
+    app: nginx
 spec:
-  ports:
-    - name: http
-      nodePort: 30080
-      port: 80
   selector:
-    name: nginx
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30007
   type: NodePort
